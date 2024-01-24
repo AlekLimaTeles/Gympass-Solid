@@ -1,16 +1,14 @@
 import fastify from "fastify";
-import { PrismaClient } from '@prisma/client'
+import { z } from 'zod';
+import { prisma } from "./lib/prisma";
+import { register } from './http/controllers/register'
+
 
 export const app = fastify()
 
-const prisma = new PrismaClient()
 
-prisma.user.create({
-    data: {
-        name: 'Diego Fernandes',
-        email: 'diegofernandes@gmail.com',
-    },
-})
+
+app.post('/users', register)
 
 // ORM - Object Relational Mapper
 
