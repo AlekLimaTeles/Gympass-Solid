@@ -1,14 +1,30 @@
 import fastify from "fastify";
-import { z } from 'zod';
-import { prisma } from "./lib/prisma";
-import { register } from './http/controllers/register'
+import { ZodError } from 'zod';
+import { appRoutes } from "./http/routes";
+import { env } from "./env";
 
 
 export const app = fastify()
 
 
 
-app.post('/users', register)
+app.register(appRoutes)
 
-// ORM - Object Relational Mapper
+app.setErrorHandler((error, _, reply) => {
+    if (error instanceof ZodError) {
+        return reply
+            .status(400)
+            .send({ message: 'Validation error.', issues: error.format() })
+    }
+
+    if (env.NODE_ENV !== 'production') {
+        console.error(error)
+    } else {
+        // TODO: Here should log to an external tool like DataDog/NewRelic/Sentry
+    }
+
+    return reply.status(500).send({ message: 'Internal server error.' })
+})
+
+
 
