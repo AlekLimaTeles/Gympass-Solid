@@ -4,6 +4,8 @@ import { CheckInsRepository } from "@/repositories/check-ins-repository";
 interface CheckInUseCaseRequest {
     userId: string
     gymId: string
+    userLatitude: number
+    userLongitude: number
 }
 
 interface CheckInUseCaseResponse {
