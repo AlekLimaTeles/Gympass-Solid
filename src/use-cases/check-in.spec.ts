@@ -3,6 +3,8 @@ import { inMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-c
 import { CheckInUseCase } from './check-in'
 import { inMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
 import { Decimal } from '@prisma/client/runtime/library'
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
+import { MaxDistanceError } from './errors/max-distance-error'
 
 let checkInsRepository: inMemoryCheckInsRepository
 let gymsRepository: inMemoryGymsRepository
@@ -10,18 +12,18 @@ let sut: CheckInUseCase
 
 
 describe('Check-in Use Case', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
          checkInsRepository = new inMemoryCheckInsRepository()
          gymsRepository = new inMemoryGymsRepository
          sut = new CheckInUseCase(checkInsRepository, gymsRepository)
         
-         gymsRepository.items.push({
+        await gymsRepository.create({
             id: 'gym-01',
             title: 'Acad massa',
             description: '',
             phone: '',
-            latitude: new Decimal(-3.702784),
-            longitude: new Decimal(-38.6433024),
+            latitude: -3.702784,
+            longitude: -38.6433024,
         })
 
          vi.useFakeTimers()
@@ -59,7 +61,7 @@ describe('Check-in Use Case', () => {
             userId: 'user-01',
             userLatitude: -3.702784,
             userLongitude: -38.6433024,
-        })).rejects.toBeInstanceOf(Error)
+        })).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
     })
     
     it('should be able to check in twice but in diferent days', async () => {
@@ -103,7 +105,7 @@ describe('Check-in Use Case', () => {
             userId: 'user-01',
             userLatitude: -27.2092052,
             userLongitude: -49.6401091,
-        })).rejects.toBeInstanceOf(Error)
+        })).rejects.toBeInstanceOf(MaxDistanceError)
        
     })
     
