@@ -52,13 +52,7 @@ describe('Fetch User Check-in History Use Case', () => {
                 user_id: 'user-01'
             })
         }
-
-        await checkInsRepository.create({
-            gym_id: 'gym-02',
-            user_id: 'user-01'
-        })
-        
-        
+  
 
         const { checkIns } = await sut.execute({
             userId: 'user-01',

@@ -22,11 +22,6 @@ export class FetchUserCheckInsHistoryUseCase {
     }: FetchUserCheckInsHistoryUseCaseRequest): Promise<FetchUserCheckInsHistoryUseCaseResponse> {
         const checkIns = await this.checkInsRepository.findManyByUserId(userId, page)
 
-        
-
-        
-
-        
         return {
             checkIns,
         }
