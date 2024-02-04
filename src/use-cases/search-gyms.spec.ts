@@ -60,12 +60,8 @@ describe('Search Gyms Use Case', () => {
             expect.objectContaining({ title: 'JavaScript Gym 21' }),
             expect.objectContaining({ title: 'JavaScript Gym 22' })
         ])
-    })
-
-    
-
-        
-    })
+    })   
+})
         
         
 
