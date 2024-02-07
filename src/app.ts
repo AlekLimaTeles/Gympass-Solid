@@ -2,6 +2,7 @@ import fastify from "fastify";
 import { ZodError } from 'zod';
 import { appRoutes } from "./http/routes";
 import { env } from "./env";
+import fastifyJwt from "@fastify/jwt";
 
 
 export const app = fastify()
@@ -9,6 +10,10 @@ export const app = fastify()
 
 
 app.register(appRoutes)
+
+app.register(fastifyJwt, {
+    secret: env.JWT_SECRET,
+})
 
 app.setErrorHandler((error, _, reply) => {
     if (error instanceof ZodError) {
