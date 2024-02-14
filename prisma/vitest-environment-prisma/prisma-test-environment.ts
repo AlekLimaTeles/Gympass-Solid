@@ -4,6 +4,7 @@ import { execSync } from 'child_process';
 import 'dotenv/config'
 import { PrismaClient } from '@prisma/client';
 
+
 const prisma = new PrismaClient()
 
 function generateDatabaseURL(schema: string) {
@@ -18,9 +19,9 @@ function generateDatabaseURL(schema: string) {
   return url.toString()
 }
 
-export default <Environment>(<unknown> {
+export default <Environment> {
   name: 'prisma',
-  transformMode: 'web',
+  transformMode: 'ssr',
   async setup() {
     const schema = randomUUID()
 
@@ -38,4 +39,4 @@ export default <Environment>(<unknown> {
       }
     }
   }
-});
+};

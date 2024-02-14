@@ -5,21 +5,19 @@ import { describe, it, expect, beforeAll,afterAll } from 'vitest'
 
 describe('Register (e2e)', () => {
     beforeAll(async () => {
-        await app.ready
+        await app.ready()
     })
     afterAll(async () => {
-        await app.close
+        await app.close()
     })
 
-    it('should be able to register', async() => {
-        const response = await request(app.server)
-        .post('/users')
+    it('should be able to register', async () => {
+        const response = await request(app.server).post('/users')
         .send({
             name: 'John Doe',
             email: 'johndoe@example.com',
-            password: '123456',
+            password: '1234567',
         })
-
 
         expect(response.statusCode).toEqual(201)
     })
