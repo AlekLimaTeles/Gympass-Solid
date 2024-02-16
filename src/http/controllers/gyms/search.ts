@@ -9,7 +9,7 @@ export  async function search (request: FastifyRequest, reply: FastifyReply) {
     })
 
     const { q, page} =
-    searchGymsQuerySchema.parse(request.body)
+    searchGymsQuerySchema.parse(request.query)
 
    
     const searchGymsUseCase = makeSearchGymsUseCase()
@@ -19,7 +19,7 @@ export  async function search (request: FastifyRequest, reply: FastifyReply) {
         page
     })
    
-    return reply.status(201).send({
+    return reply.status(200).send({
         gyms,
     })
 }
