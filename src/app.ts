@@ -4,12 +4,14 @@ import { usersRoutes } from '@/http/controllers/users/routes'
 import { gymsRoutes } from '@/http/controllers/gyms/routes'
 import { env } from "./env";
 import fastifyJwt from "@fastify/jwt";
+import fastifyCookie from '@fastify/cookie'
 import { checkinsRoutes } from "./http/controllers/check-ins/routes";
 
 
 export const app = fastify()
 
 
+app.register(fastifyCookie)
 
 app.register(usersRoutes)
 app.register(gymsRoutes)
@@ -17,6 +19,9 @@ app.register(checkinsRoutes)
 
 app.register(fastifyJwt, {
     secret: env.JWT_SECRET,
+    sign: {
+        expiresIn: '10m',
+    }
 })
 
 app.setErrorHandler((error, _, reply) => {
