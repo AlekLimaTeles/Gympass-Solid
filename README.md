@@ -1,6 +1,6 @@
-# Projeto Daily-Diet 
+# Projeto Gympass-Solid
 
-### Aplicação backend de um software de dieta!
+### Aplicação backend de um software para simular GymPass!
 
 ## Tecnologias utilizadas 
 
@@ -14,13 +14,17 @@
 
 ## Models
 
-- Meal
+- User
   - Nome
   - Descrição
   - Data e Hora
   - Está dentro ou não da dieta
 
-- User
+- Check-in
+  - Name
+  - Email
+
+- Gym
   - Name
   - Email
 
@@ -28,23 +32,35 @@
 
 ### / users
 - [x] Deve ser possível *criar* um usuário
-- [x] Deve ser possível *identificar* o usuário entre as requisições
-- [x] Deve ser possível *recuperar as métricas* de um usuário
-  - [X] Quantidade total de refeições registradas
-  - [x] Quantidade total de refeições dentro da dieta
-  - [x] Quantidade total de refeições fora da dieta
-  - [x] Melhor sequência de refeições dentro da dieta
+- [x] Deve ser possível autenticar um usuário
+- [x] Deve ser possível obter o perfil de um usuário logado
+  
+- [x] O usuário não deve poder se cadastrar com um e-mail duplicado;
+- [x] Quantidade total de refeições fora da dieta
+- [x] Melhor sequência de refeições dentro da dieta
 - [x] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
 
+### / check-ins
+- [x] Deve ser possível obter o número de check-ins realizado pelo usuário logado;
+- [x] Deve ser possível o usuário obter o seu histórico de check-ins;
+- [x] Deve ser possível o usuário realizar check-in em uma academia;
+- [X] Deve ser possível validar o check-in de um usuário;
+- [x] O usuário não pode fazer 2 check-ins no mesmo dia;
+- [x] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
+- [x] O check-in só pode ser validado até 20 minutos após  criado;
+- [x] O check-in só pode ser validado por administradores;
 
-### / meals
 
-- [x] Deve ser possível *registrar uma refeição* feita, com as seguintes informações:
+### / gyms
+- [x] Deve ser possível cadastrar uma academia;
+- [x] Deve ser possível o usuário buscar academias próximas(até 10km);
+- [x] - [x] Deve ser possível o usuário buscar academias pelo nome;
+- [x] A academia só pode ser cadastrada por administradores;
 
-    As refeições devem ser relacionadas a um usuário.
-  
 
-- [x] Deve ser possível *listar* todas as refeições de um usuário
-- [x] Deve ser possível *visualizar* uma única refeição
-- [x] Deve ser possível *editar* uma refeição, podendo alterar todos os dados acima
-- [x] Deve ser possível *apagar* uma refeição
+## RNFs (Requisitos não-funcionais)
+
+- [x] A senha do usuário precisa estar criptografada;
+- [x] Os dados da aplicação precisam estar persistidos em um banco  PostgreSQL;
+- [x] Todas listas de dados precisam estar paginadas  com 20 itens por pagina;
+- [x] O usuário deve ser identificado por um JWT(JSON Web Token);
