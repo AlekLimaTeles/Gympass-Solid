@@ -1,32 +1,50 @@
-# App
+# Projeto Daily-Diet 
 
-Gympass style app.
+### Aplicação backend de um software de dieta!
 
-## RFs (Requisitos Funcionais)
+## Tecnologias utilizadas 
 
-- [x] Deve ser possível se cadastrar;
-- [x] Deve ser possível se autenticar;
-- [x] Deve ser possível obter o perfil de um usuário logado;
-- [x] Deve ser possível obter o número de check-ins realizado pelo usuário logado;
-- [x] Deve ser possível o usuário obter o seu histórico de check-ins;
-- [x] Deve ser possível o usuário buscar academias próximas(até 10km);
-- [x] Deve ser possível o usuário buscar academias pelo nome;
-- [x] Deve ser possível o usuário realizar check-in em uma academia;
-- [x] Deve ser possível validar o check-in de um usuário;
-- [x] Deve ser possível cadastrar uma academia;
 
-## RNs (Regras de negócio)
+- [Vitest](https://vitest.dev/) (Para testes unitários e E2E)
+- [Fastify](https://fastify.dev/) (Framework para back-end)
+- [ESLint](https://eslint.org/) (Controle de qualidade do codigo)
+- [Zod](https://zod.dev/) (Validação de Schema)
+- [Knex](https://knexjs.org/) (Query Builder de banco de dados)
+- [SQLite](https://www.sqlite.org/index.html) (Banco de dados)
 
-- [x] O usuário não deve poder se cadastrar com um e-mail duplicado;
-- [x] O usuário não pode fazer 2 check-ins no mesmo dia;
-- [x] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
-- [x] O check-in só pode ser validado até 20 minutos após  criado;
-- [x] O check-in só pode ser validado por administradores;
-- [x] A academia só pode ser cadastrada por administradores;
+## Models
 
-## RNFs (Requisitos não-funcionais)
+- Meal
+  - Nome
+  - Descrição
+  - Data e Hora
+  - Está dentro ou não da dieta
 
-- [x] A senha do usuário precisa estar criptografada;
-- [x] Os dados da aplicação precisam estar persistidos em um banco  PostgreSQL;
-- [x] Todas listas de dados precisam estar paginadas  com 20 itens por pagina;
-- [x] O usuário deve ser identificado por um JWT(JSON Web Token);
+- User
+  - Name
+  - Email
+
+## Requisitos da aplicação (Rotas)
+
+### / users
+- [x] Deve ser possível *criar* um usuário
+- [x] Deve ser possível *identificar* o usuário entre as requisições
+- [x] Deve ser possível *recuperar as métricas* de um usuário
+  - [X] Quantidade total de refeições registradas
+  - [x] Quantidade total de refeições dentro da dieta
+  - [x] Quantidade total de refeições fora da dieta
+  - [x] Melhor sequência de refeições dentro da dieta
+- [x] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou
+
+
+### / meals
+
+- [x] Deve ser possível *registrar uma refeição* feita, com as seguintes informações:
+
+    As refeições devem ser relacionadas a um usuário.
+  
+
+- [x] Deve ser possível *listar* todas as refeições de um usuário
+- [x] Deve ser possível *visualizar* uma única refeição
+- [x] Deve ser possível *editar* uma refeição, podendo alterar todos os dados acima
+- [x] Deve ser possível *apagar* uma refeição
