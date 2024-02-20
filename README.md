@@ -16,17 +16,22 @@
 
 - User
   - Nome
-  - Descrição
-  - Data e Hora
-  - Está dentro ou não da dieta
+  - Email
+  - Role
+  - Password
 
 - Check-in
-  - Name
-  - Email
+  - User_id
+  - Gym_id
+  -created_at
+  -validate_at
 
 - Gym
-  - Name
-  - Email
+  - Title
+  - Description
+  - Phone
+  - Latitude
+  - Longitude
 
 ## Requisitos da aplicação (Rotas)
 
